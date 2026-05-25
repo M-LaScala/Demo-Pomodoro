@@ -57,7 +57,7 @@ ViewModel: Essa é a parte lógica da aplicação, essa camada é onde se aplica
 
 Ao executar a aplicação, você verá a interface principal do timer Pomodoro, onde poderá  iniciar o timer e acompanhar os ciclos visuais representados por elipses animadas na tela.
 
-![](./Assets/Main.png)
+<img src="./Assets/Main.png" width="300"/>
 
 ## Conclusão
 
