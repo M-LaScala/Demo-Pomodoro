@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Demo_Pomodoro.MainPage"
+             xmlns:models="clr-namespace:Demo_Pomodoro.Models"
+             xmlns:viewmodels="clr-namespace:Demo_Pomodoro.ViewModels"
+             BackgroundColor="#D3FFD6">
+
+    <Grid>
+
+        <!-- Definindo as linhas -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Settings -->
+        <Grid Grid.Row="0" Margin="0,10,0,0">
+            <Grid HeightRequest="55" VerticalOptions="Start">
+                <Label Text="Timer"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       TextColor="#55B25A"/>
+            </Grid>
+        </Grid>
+
+        <!-- Contador -->
+        <VerticalStackLayout Grid.Row="1">
+            <Grid Margin="0,20,0,20">
+                <Border BackgroundColor="#55B25A"
+                        HorizontalOptions="Center"
+                        Stroke="#55B25A"
+                        Padding="75"
+                        StrokeShape="RoundRectangle 12">
+                    <Label Text="{Binding TimerDisplay}"
+                           TextColor="#FFFFFF"
+                           TextDecorations="Underline"
+                           FontSize="86"
+                           LineBreakMode="NoWrap"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Border>
+            </Grid>
+
+            <!-- Sessões (Dinâmicas) -->
+            <Grid HeightRequest="120" Margin="20,0,20,0"
+                  MaximumWidthRequest="380"
+                  HorizontalOptions="Center">
+                <FlexLayout Wrap="Wrap"
+                            JustifyContent="Center"
+                            AlignItems="Center"
+                            BindableLayout.ItemsSource="{Binding EllipseItems}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:EllipseItem">
+                            <Ellipse WidthRequest="40"
+                                     HeightRequest="40"
+                                     Margin="5"
+                                     Stroke="#55B25A"
+                                     StrokeThickness="3.6"
+                                     IsVisible="{Binding Visibility}"
+                                     Fill="{Binding FillColor}"
+                                     FlexLayout.Basis="85"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </Grid>
+        </VerticalStackLayout>
+
+        <!-- Botões -->
+        <VerticalStackLayout Grid.Row="2" Margin="0,10,0,0" VerticalOptions="Start">
+            <Grid MaximumWidthRequest="400"
+                  HorizontalOptions="Center"
+                  ColumnDefinitions="*,Auto,*">
+
+                <!-- Botão Restart -->
+                <Button Grid.Column="0"
+                        Text="&#xe5d5;"
+                        FontFamily="MaterialIcons"
+                        FontSize="42"
+                        TextColor="#55B25A"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        Padding="5"
+                        Margin="10"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Command="{Binding RestartCommand}"
+                        IsVisible="{Binding IsRestartButtonVisible}"/>
+
+                <!-- Botão Play e Pause -->
+                <Grid Grid.Column="1" HorizontalOptions="Center">
+                    <Button Text="&#xe037;"
+                            FontFamily="MaterialIcons"
+                            FontSize="92"
+                            TextColor="#55B25A"
+                            BackgroundColor="Transparent"
+                            BorderWidth="0"
+                            Padding="5"
+                            Margin="10"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Command="{Binding PlayCommand}"
+                            IsVisible="{Binding IsPlayButtonVisible}"/>
+
+                    <Button Text="&#xe034;"
+                            FontFamily="MaterialIcons"
+                            FontSize="92"
+                            TextColor="#55B25A"
+                            BackgroundColor="Transparent"
+                            BorderWidth="0"
+                            Padding="5"
+                            Margin="10"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Command="{Binding PauseCommand}"
+                            IsVisible="{Binding IsPauseButtonVisible}"/>
+                </Grid>
+
+                <!-- Botão Close -->
+                <Button Grid.Column="2"
+                        Text="&#xe5cd;"
+                        FontFamily="MaterialIcons"
+                        FontSize="42"
+                        TextColor="#55B25A"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        Padding="5"
+                        Margin="10"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Command="{Binding CloseCommand}"
+                        IsVisible="{Binding IsCloseButtonVisible}"/>
+
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>
